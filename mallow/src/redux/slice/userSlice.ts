@@ -56,19 +56,18 @@ export const createUser = createAsyncThunk(
   }
 );
 
-// DELETE user
 export const deleteUser = createAsyncThunk(
-  "users/deleteUser",
-  async (id: number) => {
-    const response = await axios.delete(`https://reqres.in/api/users/${id}`, {
-      headers: {
-        "x-api-key": "reqres-free-v1",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    return response.data;
-  }
-);
+    "users/deleteUser",
+    async (id: number) => {
+      await axios.delete(`https://reqres.in/api/users/${id}`, {
+        headers: {
+          "x-api-key": "reqres-free-v1",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return id; // return the id for reducer to remove from store
+    }
+  );
 
 // EDIT (update) user
 export const editUser = createAsyncThunk(

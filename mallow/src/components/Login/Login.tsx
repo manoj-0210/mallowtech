@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./Login.scss";
 import { useNavigate } from "react-router-dom";
+import { FaUser, FaLock } from "react-icons/fa";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("eve.holt@reqres.in");
-  const [password, setPassword] = useState<string>("password");
+  const [password, setPassword] = useState<string>("cityslicka");
   const [rememberMe, setRememberMe] = useState<boolean>(true);
   const navigate = useNavigate();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -18,15 +20,12 @@ const Login: React.FC = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-
-      if (!response.ok) {
-        throw new Error("Login failed");
-      }
-
-      const data = await response.json(); 
-      navigate("/user");
+      if (!response.ok) throw new Error("Login failed");
+      const data = await response.json();
       localStorage.setItem("auth_token", data.token);
-    } catch (error) {
+      localStorage.setItem("user_mail", email);
+      navigate("/user");
+    } catch {
       alert("Login failed. Please check your credentials.");
     }
   };
@@ -34,22 +33,28 @@ const Login: React.FC = () => {
   return (
     <div className="login-screen">
       <form onSubmit={handleSubmit} className="form">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="input"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="input"
-          required
-        />
+        <div className="input-wrapper">
+          <FaUser className="input-icon" />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="input"
+            required
+          />
+        </div>
+        <div className="input-wrapper">
+          <FaLock className="input-icon" />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="input"
+            required
+          />
+        </div>
         <label className="checkbox-container">
           <input
             type="checkbox"

@@ -5,19 +5,25 @@ const UserTable = ({
   usersdata,
   setIsModalOpen,
   setIsEditId,
+  setdelete,
 }: {
   usersdata: any;
   setIsModalOpen: any;
   setIsEditId: any;
+  setdelete: any;
 }) => {
   const handleEdit = (val: any) => {
     setIsModalOpen(true);
     setIsEditId(val);
   };
+  const handledelete = (val: any) => {
+    setdelete(true);
+    setIsEditId(val);
+  };
   return (
     <table className="user-table">
       <thead>
-        <tr>
+        <tr style={{ backgroundColor: "#6666662b" }}>
           <th>Email</th>
           <th>First Name</th>
           <th>Last Name</th>
@@ -31,7 +37,7 @@ const UserTable = ({
               <td>
                 <div className="user-email">
                   <img src={user.avatar} alt={user.first_name} />
-                  <a href={`mailto:${user.email}`}>{user.email}</a>
+                  <a href="">{user.email}</a>
                 </div>
               </td>
               <td>{user.first_name}</td>
@@ -43,7 +49,12 @@ const UserTable = ({
                 >
                   Edit
                 </button>
-                <button className="delete-btn">Delete</button>
+                <button
+                  className="delete-btn"
+                  onClick={() => handledelete(user.id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

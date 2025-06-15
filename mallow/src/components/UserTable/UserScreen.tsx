@@ -10,6 +10,7 @@ import Formmodal from "./Formmodal";
 import UserCard from "./UserCard";
 import SvgSpinner from "../../SvgFiles/SvgSpinner";
 import Header from "./Header";
+import Userdelete from "./userdelete";
 
 interface User {
   id: number;
@@ -19,7 +20,7 @@ interface User {
   avatar: string;
 }
 
-const UserScreen: React.FC = () => {
+const UserScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [users, setUsers] = useState<User[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,6 +28,7 @@ const UserScreen: React.FC = () => {
   const [page, setPage] = useState(1);
   const [isEditId, setIsEditId] = useState(0);
   const [isPagelayout, setPagelayout] = useState(1);
+  const [isdelete, setdelete] = useState(false);
 
   const { usersdata, usersdetail, loading } = useSelector((state: any) => ({
     usersdata: state.users.users,
@@ -53,8 +55,22 @@ const UserScreen: React.FC = () => {
     dispatch(fetchUsers(page));
   }, [page]);
   const submituser = (val: any) => {
-    // dispatch(editUser({ id: isEditId, updatedUser: val }));
-    dispatch(createUser(val));
+    if (isEditId > 0) {
+      dispatch(editUser({ id: isEditId, updatedUser: val })).then((res) => {
+        setIsModalOpen(false);
+        const user = res?.payload;
+        alert(
+          `User Updated:\n\nFirst Name: ${user?.firstName}\nLast Name: ${user?.lastName}\nEmail: ${user?.email}\nUpdated At: ${user?.updatedAt}`
+        );
+      });
+    } else
+      dispatch(createUser(val)).then((res) => {
+        setIsModalOpen(false);
+        const user = res?.payload;
+        alert(
+          `User Created:\n\nFirst Name: ${user?.firstName}\nLast Name: ${user?.lastName}\nEmail: ${user?.email}\nUpdated At: ${user?.updatedAt}`
+        );
+      });
     setIsEditId(0);
   };
 
@@ -71,7 +87,7 @@ const UserScreen: React.FC = () => {
       user.first_name.toLowerCase().includes(searchText.toLowerCase()) ||
       user.last_name.toLowerCase().includes(searchText.toLowerCase())
   );
- 
+
   return (
     <>
       <Formmodal
@@ -86,7 +102,14 @@ const UserScreen: React.FC = () => {
         }}
         initialValues={initialValues}
       />
-      <></>
+      <Userdelete
+        isOpen={isdelete}
+        onClose={() => {
+          setdelete(false);
+          setIsEditId(0);
+        }}
+        isEditId={isEditId}
+      />
       <Header />
       <div className="user-container">
         <div className="header">
@@ -99,10 +122,11 @@ const UserScreen: React.FC = () => {
                 value={searchText}
                 onChange={handleSearchChange}
               />
-              {searchText && (
+              {searchText ? (
                 <FaTimes className="clear-icon" onClick={clearSearch} />
+              ) : (
+                <FaSearch />
               )}
-              <FaSearch />
             </div>
             <button className="create-btn" onClick={() => setIsModalOpen(true)}>
               Create User
@@ -142,11 +166,19 @@ const UserScreen: React.FC = () => {
                     usersdata={filteredUsers}
                     setIsEditId={setIsEditId}
                     setIsModalOpen={setIsModalOpen}
+                    setdelete={setdelete}
                   />
                 ) : (
                   <div className="card-grid">
                     {filteredUsers?.map((user: any) => (
-                      <UserCard key={user.id} user={user} />
+                      <UserCard
+                        key={user.id}
+                        user={user}
+                        setIsEditId={setIsEditId}
+                        setIsModalOpen={setIsModalOpen}
+                        isModalOpen={isModalOpen}
+                        setdelete={setdelete}
+                      />
                     ))}
                   </div>
                 )}
