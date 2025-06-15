@@ -178,6 +178,7 @@ const UserScreen = () => {
                         setIsModalOpen={setIsModalOpen}
                         isModalOpen={isModalOpen}
                         setdelete={setdelete}
+                        isdelete={isdelete}
                       />
                     ))}
                   </div>

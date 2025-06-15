@@ -8,12 +8,14 @@ const UserCard = ({
   setIsEditId,
   isModalOpen,
   setdelete,
+  isdelete
 }: {
   user: any;
   setIsModalOpen: any;
   setIsEditId: any;
   isModalOpen: boolean;
   setdelete: any;
+  isdelete: boolean;
 }) => {
   const handleEdit = (val: any) => {
     setIsModalOpen(true);
@@ -25,7 +27,7 @@ const UserCard = ({
   };
   return (
     <div className="user-card">
-      {!isModalOpen && (
+      {!isModalOpen && !isdelete && (
         <div className="action-buttons">
           <button
             className="action-btn btn-edit"
