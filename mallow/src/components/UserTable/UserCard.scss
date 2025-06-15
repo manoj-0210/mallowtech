@@ -1,0 +1,102 @@
+///css////
+.user-card {
+  position: relative;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.user-card:hover {
+  transform: translateY(-4px);
+  background-color: rgba(80, 80, 80, 0.5);
+}
+.no-users {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+/* Profile image */
+.user-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+  z-index: 1;
+}
+
+/* Hover overlay behind image + icons */
+.user-card .hover-overlay {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  background-color: rgba(80, 80, 80, 0.5);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+/* Show overlay on hover */
+.user-card:hover .hover-overlay {
+  opacity: 1;
+}
+
+/* Icon buttons */
+.user-card .action-buttons {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+/* Show buttons only on hover */
+.user-card:hover .action-buttons {
+  opacity: 1;
+}
+
+.action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background-color: #7b5be0;
+}
+
+.btn-delete {
+  background-color: #e53935;
+}
+
+/* Text */
+.user-card h3 {
+  margin: 8px 0 4px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.user-card p {
+  color: #666;
+  font-size: 14px;
+}

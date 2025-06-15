@@ -1,0 +1,125 @@
+.user-container {
+//   background-color: #f5f6fa;
+  padding: 20px;
+  border-radius: 8px;
+  font-family: sans-serif;
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    font-size: 24px; 
+  }
+  .search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 10px;
+    background-color: white;
+
+    input {
+      border: none;
+      outline: none;
+      margin-left: 6px;
+      flex: 1;
+    }
+
+    svg {
+      cursor: pointer;
+      color: #888;
+    }
+
+    .clear-icon {
+      position: absolute;
+      right: 160px;
+      margin-left: 6px;
+      border-radius: 50%;
+      color: #888;
+    }
+  }
+  .view-toggle {
+    margin-right: 8px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    .button {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #8f8d8d;
+      border-left: 1px solid #8f8d8d;
+      border-bottom: 1px solid #8f8d8d;
+      border-right: 1px solid white;
+      padding: 6px 12px;
+    }
+    .button-2 {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #8f8d8d;
+      border-right: 1px solid #8f8d8d;
+      border-bottom: 1px solid #8f8d8d;
+      border-left: 1px solid white;
+      padding: 6px 12px;
+    }
+    .active {
+      background-color: #e6f0ff;
+      border-color: #195fc1;
+      color: #195fc1;
+    } 
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .search-create {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      input {
+        padding: 6px 25px 6px 10px;
+        border-radius: 4px;
+      }
+
+      .create-btn {
+        height: 40px;
+        background-color: #2196f3;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+  }
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+    gap: 6px;
+
+    button {
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      background-color: white;
+      cursor: pointer;
+
+      &.active {
+        background-color: #3f8efc;
+        color: white;
+      }
+    }
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+}
