@@ -20,6 +20,7 @@ const Userdelete = ({ isOpen, onClose, isEditId }: UserProps) => {
   };
   const handledelete = () => {
     dispatch(deleteUser(isEditId || 0)).then((res) => {
+      alert("User deleted successfully");
       onClose();
     });
   };

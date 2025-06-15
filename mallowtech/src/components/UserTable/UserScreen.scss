@@ -1,4 +1,4 @@
-.user-container { 
+.user-container {
   padding: 20px;
   border-radius: 8px;
   font-family: sans-serif;
@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
     height: 50vh;
-    font-size: 24px; 
+    font-size: 24px;
   }
   .search-box {
     display: flex;
@@ -29,7 +29,7 @@
       color: #888;
     }
 
-    .clear-icon {  
+    .clear-icon {
       border-radius: 50%;
       color: #888;
     }
@@ -61,7 +61,7 @@
       background-color: #e6f0ff;
       border-color: #195fc1;
       color: #195fc1;
-    } 
+    }
   }
   .header {
     display: flex;
@@ -115,7 +115,13 @@
   }
   .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
+    display: flex;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    overflow-y: auto;
+    flex-wrap: wrap;
+    padding: 10px;
   }
 }
